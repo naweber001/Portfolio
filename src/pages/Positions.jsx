@@ -4,11 +4,13 @@ import {
   savePositions,
   fetchQuotes,
   getApiKey,
+  getDataSource,
   formatCurrency,
   formatPercent,
   formatNumber,
   getPnLClass,
 } from '../utils/helpers'
+import { fetchYahooQuotes } from '../utils/marketData'
 import './Positions.css'
 
 export default function Positions() {
@@ -21,12 +23,15 @@ export default function Positions() {
   const [sortDir, setSortDir] = useState('asc')
 
   const refreshQuotes = useCallback((pos) => {
+    const symbols = pos.map((p) => p.symbol)
+    const source = getDataSource()
     const apiKey = getApiKey()
-    if (!apiKey) {
-      setLoading(false)
-      return
-    }
-    fetchQuotes(pos.map((p) => p.symbol), apiKey)
+
+    const fetchFn = source === 'finnhub' && apiKey
+      ? fetchQuotes(symbols, apiKey)
+      : fetchYahooQuotes(symbols)
+
+    fetchFn
       .then((q) => { setQuotes(q); setLoading(false) })
       .catch(() => setLoading(false))
   }, [])

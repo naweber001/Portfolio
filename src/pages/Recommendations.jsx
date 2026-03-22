@@ -3,9 +3,10 @@ import {
   loadPositions,
   fetchQuotes,
   getApiKey,
+  getDataSource,
   formatCurrency,
 } from '../utils/helpers'
-import { fetchAllHistorical, fetchAllAnalystData } from '../utils/marketData'
+import { fetchAllHistorical, fetchAllAnalystData, fetchYahooQuotes } from '../utils/marketData'
 import { generateSignal } from '../utils/technicals'
 import './Recommendations.css'
 
@@ -32,19 +33,26 @@ export default function Recommendations() {
       }
       const symbols = positions.map((p) => p.symbol)
       const apiKey = getApiKey()
+      const source = getDataSource()
 
       try {
-        // Fetch historical prices from Yahoo (no key needed)
+        // Fetch historical prices from Yahoo (always, for technical analysis)
         const historical = await fetchAllHistorical(symbols, '6mo')
 
-        // Fetch live quotes and analyst data from Finnhub (if key available)
+        // Fetch live quotes based on preferred source
         let quotes = {}
         let analystData = {}
-        if (apiKey) {
+        if (source === 'finnhub' && apiKey) {
           ;[quotes, analystData] = await Promise.all([
             fetchQuotes(symbols, apiKey),
             fetchAllAnalystData(symbols, apiKey),
           ])
+        } else {
+          quotes = await fetchYahooQuotes(symbols)
+          // Still fetch analyst data from Finnhub if key available
+          if (apiKey) {
+            analystData = await fetchAllAnalystData(symbols, apiKey)
+          }
         }
 
         // Build recommendations from combined data

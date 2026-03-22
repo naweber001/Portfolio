@@ -17,6 +17,51 @@ export async function fetchHistoricalPrices(symbol, range = '6mo') {
 }
 
 /**
+ * Fetch a quote from Yahoo Finance chart data.
+ * Returns same shape as Finnhub quote for interchangeability.
+ */
+export async function fetchYahooQuote(symbol) {
+  const url = `${YAHOO_BASE}/${encodeURIComponent(symbol)}?range=5d&interval=1d`
+  const res = await fetch(url)
+  if (!res.ok) throw new Error(`Yahoo Finance error: ${res.status}`)
+  const json = await res.json()
+  const result = json.chart?.result?.[0]
+  if (!result) throw new Error(`No Yahoo data for ${symbol}`)
+  const meta = result.meta || {}
+  const closes = result.indicators?.quote?.[0]?.close || []
+  const current = meta.regularMarketPrice || closes.filter(c => c != null).pop() || 0
+  const previousClose = meta.chartPreviousClose || meta.previousClose || 0
+  const change = previousClose ? current - previousClose : 0
+  const changePercent = previousClose ? (change / previousClose) * 100 : 0
+  return {
+    current,
+    change,
+    changePercent,
+    high: meta.regularMarketDayHigh || 0,
+    low: meta.regularMarketDayLow || 0,
+    open: meta.regularMarketDayOpen || 0,
+    previousClose,
+    source: 'yahoo',
+  }
+}
+
+/**
+ * Fetch quotes from Yahoo Finance for multiple symbols.
+ */
+export async function fetchYahooQuotes(symbols) {
+  const results = {}
+  const promises = symbols.map(async (sym) => {
+    try {
+      results[sym] = await fetchYahooQuote(sym)
+    } catch {
+      results[sym] = null
+    }
+  })
+  await Promise.all(promises)
+  return results
+}
+
+/**
  * Fetch historical prices for multiple symbols.
  * Returns { [symbol]: number[] }
  */

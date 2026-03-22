@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { getApiKey, setApiKey } from '../utils/helpers'
+import { getApiKey, setApiKey, getDataSource, setDataSource } from '../utils/helpers'
 import './Settings.css'
 
 export default function Settings() {
   const [key, setKey] = useState(getApiKey())
   const [saved, setSaved] = useState(false)
+  const [source, setSource] = useState(getDataSource())
 
   function handleSave(e) {
     e.preventDefault()
@@ -13,20 +14,62 @@ export default function Settings() {
     setTimeout(() => setSaved(false), 2000)
   }
 
+  function handleSourceChange(value) {
+    setSource(value)
+    setDataSource(value)
+  }
+
   return (
     <div className="settings-page">
       <h1 className="page-title">Settings</h1>
 
       <div className="settings-section">
-        <h2 className="section-title">Market Data API</h2>
+        <h2 className="section-title">Quote Data Source</h2>
         <p className="settings-description">
-          This app uses <a href="https://finnhub.io" target="_blank" rel="noreferrer">Finnhub</a> for
-          live stock prices. Sign up for a free API key to enable real-time data.
+          Choose where to pull live price quotes from. Both sources provide current price,
+          day change, and open/high/low data. Yahoo Finance requires no API key.
+          Finnhub provides real-time data but requires a free API key.
+        </p>
+
+        <div className="source-toggle">
+          <button
+            className={`source-btn ${source === 'yahoo' ? 'active' : ''}`}
+            onClick={() => handleSourceChange('yahoo')}
+          >
+            <span className="source-name">Yahoo Finance</span>
+            <span className="source-detail">No API key needed</span>
+          </button>
+          <button
+            className={`source-btn ${source === 'finnhub' ? 'active' : ''}`}
+            onClick={() => handleSourceChange('finnhub')}
+          >
+            <span className="source-name">Finnhub</span>
+            <span className="source-detail">Real-time, needs API key</span>
+          </button>
+        </div>
+
+        {source === 'finnhub' && !key && (
+          <p className="source-warning">
+            Finnhub selected but no API key set. Quotes will fall back to Yahoo Finance until a key is added.
+          </p>
+        )}
+
+        <p className="help-note" style={{ marginTop: 12 }}>
+          Note: Analyst targets and recommendations are always from Finnhub (when API key is available).
+          Historical data for technical analysis is always from Yahoo Finance.
+        </p>
+      </div>
+
+      <div className="settings-section" style={{ marginTop: 20 }}>
+        <h2 className="section-title">Finnhub API Key</h2>
+        <p className="settings-description">
+          Required for Finnhub quotes, analyst price targets, and recommendation data.
+          Sign up at <a href="https://finnhub.io" target="_blank" rel="noreferrer">Finnhub</a> for a free key.
         </p>
 
         <form className="api-form" onSubmit={handleSave}>
           <div className="input-group">
-            <label htmlFor="apiKey">Finnhub API Key</label>
+            <label htmlFor="apiKey">API Key</label>
             <input
               id="apiKey"
               type="password"

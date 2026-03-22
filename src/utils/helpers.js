@@ -79,6 +79,16 @@ export async function fetchQuotes(symbols, apiKey) {
   return results
 }
 
+const DATA_SOURCE_STORAGE = 'data_source_preference'
+
+export function getDataSource() {
+  return localStorage.getItem(DATA_SOURCE_STORAGE) || 'yahoo'
+}
+
+export function setDataSource(source) {
+  localStorage.setItem(DATA_SOURCE_STORAGE, source)
+}
+
 const POSITIONS_STORAGE = 'portfolio_positions'
 
 export function loadPositions() {
