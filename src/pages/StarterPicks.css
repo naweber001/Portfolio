@@ -1,0 +1,107 @@
+.starter-page {
+  max-width: 100%;
+}
+
+.starter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 16px;
+}
+
+.starter-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.15s ease;
+  cursor: pointer;
+}
+
+.starter-card:hover {
+  border-color: var(--text-muted);
+}
+
+.starter-card.action-buy  { border-left: 3px solid var(--green); }
+.starter-card.action-sell { border-left: 3px solid var(--red); }
+.starter-card.action-hold { border-left: 3px solid var(--yellow); }
+
+.starter-card.expanded {
+  grid-column: 1 / -1;
+}
+
+.starter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.starter-symbol-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.starter-symbol-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.starter-symbol {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.starter-category {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--blue-bg);
+  color: var(--blue);
+}
+
+.starter-name {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.starter-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.starter-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.starter-prices {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.starter-price-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.starter-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.starter-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+}

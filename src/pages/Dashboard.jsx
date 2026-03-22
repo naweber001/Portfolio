@@ -74,6 +74,11 @@ export default function Dashboard() {
       {error && <div className="alert">{error}</div>}
       {loading ? (
         <div className="loading">Loading quotes...</div>
+      ) : positions.length === 0 ? (
+        <div className="empty-state">
+          <h2>Welcome to TradeView</h2>
+          <p>You don't have any positions yet. Head to the <a href="positions">Positions</a> page to add your first stock, or check out <a href="starter-picks">Starter Picks</a> for blue chip recommendations.</p>
+        </div>
       ) : (
         <>
           <PortfolioSummary positions={positions} quotes={quotes} />

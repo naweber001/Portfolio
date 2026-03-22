@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react'
-import { samplePositions } from '../data/samplePositions'
 import {
   loadPositions,
   savePositions,
@@ -34,10 +33,10 @@ export default function Positions() {
 
   useEffect(() => {
     const saved = loadPositions()
-    const pos = saved || samplePositions
+    const pos = saved || []
     setPositions(pos)
-    if (!saved) savePositions(samplePositions)
-    refreshQuotes(pos)
+    if (pos.length > 0) refreshQuotes(pos)
+    else setLoading(false)
   }, [refreshQuotes])
 
   function handleAdd(e) {
