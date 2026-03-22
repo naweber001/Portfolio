@@ -1,0 +1,149 @@
+.positions-page {
+  max-width: 100%;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg-primary);
+  border: none;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.add-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.add-form input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  flex: 1;
+  min-width: 120px;
+}
+
+.add-form input::placeholder {
+  color: var(--text-muted);
+}
+
+.add-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.positions-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.positions-table thead {
+  background: var(--bg-secondary);
+}
+
+.positions-table th {
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.positions-table th:hover {
+  color: var(--text-secondary);
+}
+
+.positions-table td {
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.positions-table tr:last-child td {
+  border-bottom: none;
+}
+
+.positions-table tr:hover td {
+  background: var(--bg-hover);
+}
+
+.cell-symbol {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.cell-name {
+  color: var(--text-secondary);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+td.positive { color: var(--green); font-weight: 600; }
+td.negative { color: var(--red); font-weight: 600; }
+
+.btn-remove {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.btn-remove:hover {
+  background: var(--red-bg);
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.loading {
+  color: var(--text-secondary);
+  padding: 40px 0;
+  text-align: center;
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 32px !important;
+}

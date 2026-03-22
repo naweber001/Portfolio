@@ -1,0 +1,58 @@
+export const recommendations = [
+  {
+    symbol: 'AAPL',
+    name: 'Apple Inc.',
+    action: 'buy',
+    targetPrice: 250.00,
+    rationale: 'Strong services revenue growth and upcoming product cycle. iPhone installed base continues to expand, supporting recurring revenue.',
+  },
+  {
+    symbol: 'NVDA',
+    name: 'NVIDIA Corp.',
+    action: 'buy',
+    targetPrice: 950.00,
+    rationale: 'AI infrastructure spending accelerating. Data center revenue continues to exceed expectations with strong forward guidance.',
+  },
+  {
+    symbol: 'MSFT',
+    name: 'Microsoft Corp.',
+    action: 'hold',
+    targetPrice: 450.00,
+    rationale: 'Azure growth steady but priced in. Copilot monetization still early. Hold for long-term cloud and AI exposure.',
+  },
+  {
+    symbol: 'GOOGL',
+    name: 'Alphabet Inc.',
+    action: 'buy',
+    targetPrice: 200.00,
+    rationale: 'Search advertising resilient, YouTube growing, and cloud segment turning profitable. Undervalued relative to peers.',
+  },
+  {
+    symbol: 'TSLA',
+    name: 'Tesla Inc.',
+    action: 'sell',
+    targetPrice: 180.00,
+    rationale: 'Increasing competition in EV market. Margin pressure from price cuts. Valuation stretched relative to delivery growth.',
+  },
+  {
+    symbol: 'META',
+    name: 'Meta Platforms Inc.',
+    action: 'hold',
+    targetPrice: 550.00,
+    rationale: 'Ad revenue recovery solid but Reality Labs losses remain a drag. Reels monetization improving gradually.',
+  },
+  {
+    symbol: 'AMZN',
+    name: 'Amazon.com Inc.',
+    action: 'buy',
+    targetPrice: 230.00,
+    rationale: 'AWS re-accelerating, retail margins improving, and advertising segment growing at 20%+. Well-positioned across multiple verticals.',
+  },
+  {
+    symbol: 'JPM',
+    name: 'JPMorgan Chase & Co.',
+    action: 'hold',
+    targetPrice: 210.00,
+    rationale: 'Best-in-class bank with strong NII. Potential rate cuts could pressure margins but loan growth provides offset.',
+  },
+]

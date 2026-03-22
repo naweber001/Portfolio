@@ -1,0 +1,146 @@
+.recs-page {
+  max-width: 100%;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.filter-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--text-muted);
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg-primary);
+}
+
+.filter-btn.active.filter-buy {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.filter-btn.active.filter-sell {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+
+.filter-btn.active.filter-hold {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--bg-primary);
+}
+
+.recs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+.rec-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color 0.15s ease;
+}
+
+.rec-card:hover {
+  border-color: var(--text-muted);
+}
+
+.rec-card.action-buy  { border-left: 3px solid var(--green); }
+.rec-card.action-sell { border-left: 3px solid var(--red); }
+.rec-card.action-hold { border-left: 3px solid var(--yellow); }
+
+.rec-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.rec-symbol-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.rec-symbol {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.rec-name {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.rec-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rec-badge.action-buy  { background: var(--green-bg); color: var(--green); }
+.rec-badge.action-sell { background: var(--red-bg); color: var(--red); }
+.rec-badge.action-hold { background: var(--yellow-bg); color: var(--yellow); }
+
+.rec-prices {
+  display: flex;
+  gap: 20px;
+}
+
+.rec-price-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.rec-price-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.rec-price-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.rec-price-value.positive { color: var(--green); }
+.rec-price-value.negative { color: var(--red); }
+
+.rec-rationale {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 40px;
+}
