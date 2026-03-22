@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { samplePositions } from '../data/samplePositions'
 import {
   loadPositions,
   fetchQuotes,
@@ -26,7 +25,11 @@ export default function Recommendations() {
   useEffect(() => {
     async function loadData() {
       const saved = loadPositions()
-      const positions = saved || samplePositions
+      const positions = saved || []
+      if (positions.length === 0) {
+        setLoading(false)
+        return
+      }
       const symbols = positions.map((p) => p.symbol)
       const apiKey = getApiKey()
 
@@ -320,7 +323,10 @@ export default function Recommendations() {
         </div>
       )}
 
-      {!loading && filtered.length === 0 && (
+      {!loading && recs.length === 0 && (
+        <p className="empty">Add positions on the Positions page to get recommendations for your portfolio.</p>
+      )}
+      {!loading && recs.length > 0 && filtered.length === 0 && (
         <p className="empty">No recommendations match this filter.</p>
       )}
     </div>
