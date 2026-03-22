@@ -77,7 +77,6 @@ export default function Recommendations() {
             actionScores[analystAction] += 50
             finalAction = Object.entries(actionScores).sort((a, b) => b[1] - a[1])[0][0]
 
-            // If both agree, strengthen the signal
             if (technical.action === analystAction) {
               rationale = `Technical and analyst signals agree: ${finalAction.toUpperCase()}.`
             } else {
@@ -90,6 +89,17 @@ export default function Recommendations() {
             rationale = 'Insufficient historical data for analysis.'
           }
 
+          // Determine conflict flag (only set when both data sources exist)
+          const hasConflict = technical && target && currentPrice
+            ? (() => {
+                const au = ((target.targetMean - currentPrice) / currentPrice) * 100
+                let aa = 'hold'
+                if (au > 10) aa = 'buy'
+                else if (au < -10) aa = 'sell'
+                return technical.action !== aa && !(technical.action === 'hold' || aa === 'hold')
+              })()
+            : false
+
           return {
             symbol: pos.symbol,
             name: pos.name,
@@ -99,6 +109,7 @@ export default function Recommendations() {
             target,
             analystRec,
             rationale,
+            conflicting: hasConflict,
           }
         })
 
@@ -211,6 +222,13 @@ export default function Recommendations() {
                 </div>
 
                 <p className="rec-rationale">{rec.rationale}</p>
+
+                {rec.conflicting && (
+                  <div className="conflict-flag">
+                    <span className="conflict-icon">&#x26A0;</span>
+                    <span>Signals Diverge — Technical and analyst indicators point in opposite directions. Exercise caution.</span>
+                  </div>
+                )}
 
                 {/* Analyst consensus bar */}
                 {rec.analystRec && (
