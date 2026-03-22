@@ -1,0 +1,425 @@
+.recs-page {
+  max-width: 100%;
+}
+
+.page-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: -16px;
+  margin-bottom: 24px;
+}
+
+.alert {
+  background: var(--yellow-bg);
+  color: var(--yellow);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.filter-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-btn:hover {
+  border-color: var(--text-muted);
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg-primary);
+}
+
+.filter-btn.active.filter-buy {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.filter-btn.active.filter-sell {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+
+.filter-btn.active.filter-hold {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--bg-primary);
+}
+
+.filter-count {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+}
+
+/* Loading */
+.loading {
+  color: var(--text-secondary);
+  padding: 60px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.loading-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Grid */
+.recs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 16px;
+}
+
+.rec-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.15s ease;
+  cursor: pointer;
+}
+
+.rec-card:hover {
+  border-color: var(--text-muted);
+}
+
+.rec-card.action-buy  { border-left: 3px solid var(--green); }
+.rec-card.action-sell { border-left: 3px solid var(--red); }
+.rec-card.action-hold { border-left: 3px solid var(--yellow); }
+
+.rec-card.expanded {
+  grid-column: 1 / -1;
+}
+
+/* Header */
+.rec-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.rec-symbol-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.rec-symbol {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.rec-name {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.rec-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.score-badge {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.score-badge.positive { background: var(--green-bg); color: var(--green); }
+.score-badge.negative { background: var(--red-bg); color: var(--red); }
+.score-badge.neutral  { background: var(--blue-bg); color: var(--blue); }
+
+.rec-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rec-badge.action-buy  { background: var(--green-bg); color: var(--green); }
+.rec-badge.action-sell { background: var(--red-bg); color: var(--red); }
+.rec-badge.action-hold { background: var(--yellow-bg); color: var(--yellow); }
+
+/* Prices */
+.rec-prices {
+  display: flex;
+  gap: 20px;
+}
+
+.rec-price-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.rec-price-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.rec-price-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.rec-price-value.positive { color: var(--green); }
+.rec-price-value.negative { color: var(--red); }
+
+.rec-rationale {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Conflict flag */
+.conflict-flag {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255, 152, 0, 0.08);
+  border: 1px solid rgba(255, 152, 0, 0.25);
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  color: var(--yellow);
+  line-height: 1.5;
+}
+
+.conflict-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Analyst consensus bar */
+.analyst-bar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.analyst-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.bar-seg {
+  height: 100%;
+  min-width: 2px;
+}
+
+.bar-seg.strong-buy { background: #00e68a; }
+.bar-seg.buy-seg    { background: var(--green); }
+.bar-seg.hold-seg   { background: var(--yellow); }
+.bar-seg.sell-seg   { background: #ff7043; }
+.bar-seg.strong-sell { background: var(--red); }
+
+.analyst-legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.legend-dot.strong-buy { background: #00e68a; }
+.legend-dot.buy-seg    { background: var(--green); }
+.legend-dot.hold-seg   { background: var(--yellow); }
+.legend-dot.sell-seg   { background: #ff7043; }
+
+/* Expanded detail view */
+.signals-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.signals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.signal-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.signal-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.signal-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.signal-value {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.signal-bar-container {
+  width: 100%;
+}
+
+.signal-bar-track {
+  position: relative;
+  height: 6px;
+  background: var(--bg-primary);
+  border-radius: 3px;
+}
+
+.signal-bar-fill {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.signal-bar-fill.positive { background: var(--green); }
+.signal-bar-fill.negative { background: var(--red); }
+.signal-bar-fill.neutral  { background: var(--text-muted); }
+
+.signal-bar-center {
+  position: absolute;
+  left: 50%;
+  top: -2px;
+  width: 2px;
+  height: 10px;
+  background: var(--text-muted);
+  border-radius: 1px;
+}
+
+.signal-note {
+  grid-column: 1 / -1;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  margin-top: -4px;
+  padding-left: 2px;
+}
+
+/* Target range */
+.target-range {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.target-range-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.range-low, .range-high {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  min-width: 60px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.range-high {
+  text-align: right;
+}
+
+.range-track {
+  flex: 1;
+  height: 4px;
+  background: linear-gradient(to right, var(--red), var(--yellow), var(--green));
+  border-radius: 2px;
+  position: relative;
+}
+
+.range-current {
+  position: absolute;
+  top: -6px;
+  width: 4px;
+  height: 16px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+/* Expand hint */
+.expand-hint {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+  opacity: 0.6;
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 40px;
+}
