@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { starterPicks } from '../data/starterPicks'
-import { fetchQuotes, getApiKey, formatCurrency } from '../utils/helpers'
-import { fetchAllHistorical } from '../utils/marketData'
+import { fetchQuotes, getApiKey, getDataSource, formatCurrency } from '../utils/helpers'
+import { fetchAllHistorical, fetchYahooQuotes } from '../utils/marketData'
 import { generateSignal } from '../utils/technicals'
 import './StarterPicks.css'
 
@@ -18,13 +18,16 @@ export default function StarterPicks() {
     async function loadData() {
       const symbols = starterPicks.map((p) => p.symbol)
       const apiKey = getApiKey()
+      const source = getDataSource()
 
       try {
         const historical = await fetchAllHistorical(symbols, '6mo')
 
         let quotes = {}
-        if (apiKey) {
+        if (source === 'finnhub' && apiKey) {
           quotes = await fetchQuotes(symbols, apiKey)
+        } else {
+          quotes = await fetchYahooQuotes(symbols)
         }
 
         const results = starterPicks.map((pick) => {

@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
 import PortfolioSummary from '../components/PortfolioSummary'
-import { samplePositions } from '../data/samplePositions'
 import {
   loadPositions,
   fetchQuotes,
   getApiKey,
+  getDataSource,
   formatCurrency,
   formatPercent,
   getPnLClass,
 } from '../utils/helpers'
+import { fetchYahooQuotes } from '../utils/marketData'
 import './Dashboard.css'
 
 export default function Dashboard() {
@@ -19,24 +20,30 @@ export default function Dashboard() {
 
   useEffect(() => {
     const saved = loadPositions()
-    const pos = saved || samplePositions
+    const pos = saved || []
     setPositions(pos)
 
-    const apiKey = getApiKey()
-    if (!apiKey) {
+    if (pos.length === 0) {
       setLoading(false)
-      setError('Add your Finnhub API key in Settings to see live prices.')
       return
     }
 
-    fetchQuotes(pos.map((p) => p.symbol), apiKey)
+    const symbols = pos.map((p) => p.symbol)
+    const source = getDataSource()
+    const apiKey = getApiKey()
+
+    const fetchFn = source === 'finnhub' && apiKey
+      ? fetchQuotes(symbols, apiKey)
+      : fetchYahooQuotes(symbols)
+
+    fetchFn
       .then((q) => {
         setQuotes(q)
         setLoading(false)
       })
       .catch(() => {
         setLoading(false)
-        setError('Failed to fetch quotes. Check your API key.')
+        setError('Failed to fetch quotes.')
       })
   }, [])
 
